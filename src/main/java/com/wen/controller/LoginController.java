@@ -54,4 +54,12 @@ public class LoginController {
         UserInfo userInfo = new UserInfo(userRecord.getUserName(),permissions);
         return new R(200,"ok",userInfo);
     }
+
+    //登出接口
+    @RequestMapping("/auth/logout")
+    public String LogOut(HttpSession session){
+        System.out.println("logout");
+        session.invalidate();//将Session设置为失效
+        return "";
+    }
 }
