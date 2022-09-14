@@ -14,6 +14,10 @@ public class R {
                 '}';
     }
 
+    public R(Object result) {
+        this.result = result;
+    }
+
     public R() {
     }
 
