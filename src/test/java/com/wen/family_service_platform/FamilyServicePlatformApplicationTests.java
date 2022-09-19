@@ -1,5 +1,6 @@
 package com.wen.family_service_platform;
 
+import com.wen.bean.FcBuilding;
 import com.wen.bean.TblCompany;
 import com.wen.mapper.TblCompanyMapper;
 import com.wen.service.EstateService;
@@ -21,8 +22,8 @@ class FamilyServicePlatformApplicationTests {
 
     @Test
     void contextLoads() {
-        List<TblCompany> list = estateService.selectCompany();
-        System.out.println(list);
+        List<FcBuilding> fcBuildings = estateService.selectBuildingByEstateCode("1");
+        System.out.println(fcBuildings);
     }
 
 }

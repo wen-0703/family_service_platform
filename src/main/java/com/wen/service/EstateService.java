@@ -28,4 +28,10 @@ public interface EstateService {
     List<FcCell> selectCell(String unitCode);
 
     List<FcEstate> selectEstate(String company);
+
+    List<FcEstate> selectAllEstate();
+
+    List<FcBuilding> selectBuildingByEstateCode(String estateCode);
+
+    FcBuilding selectBuildingByEstateCodeAndBuildingCode(String buildingCode,String estateCode);
 }

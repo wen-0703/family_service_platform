@@ -114,4 +114,25 @@ public class EstateController {
         List<FcEstate> estates = service.selectEstate(company);
         return new R(estates);
     }
+
+    @RequestMapping("/estate/selectAllEstate")
+    public R selectAllEstate(){
+        System.out.println("selectAllEstate");
+        List<FcEstate> fcEstates = service.selectAllEstate();
+        return new R(fcEstates);
+    }
+
+    @RequestMapping("/estate/selectBuildingByEstateCode")
+    public R selectBuildingByEstateCode(String estateCode){
+        System.out.println("selectBuildingByEstateCode");
+        List<FcBuilding> fcBuildings = service.selectBuildingByEstateCode(estateCode);
+        return new R(fcBuildings);
+    }
+
+    @RequestMapping("/estate/selectBuildingByEstateCodeAndBuildingCode")
+    public R selectBuildingByEstateCodeAndBuildingCode(String buildingCode,String estateCode){
+        System.out.println("selectBuildingByEstateCodeAndBuildingCode");
+        FcBuilding fcBuilding = service.selectBuildingByEstateCodeAndBuildingCode(buildingCode, estateCode);
+        return new R(fcBuilding);
+    }
 }

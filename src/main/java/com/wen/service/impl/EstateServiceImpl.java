@@ -132,18 +132,35 @@ public class EstateServiceImpl implements EstateService {
 
     @Override
     public List<FcUnit> selectUnitByBuildingCode(String buildingCode) {
-        QueryWrapper<FcUnit> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("building_code",buildingCode);
-        queryWrapper.select("unit_code","unit_name");
-        List<FcUnit> fcUnits = fcUnitMapper.selectList(queryWrapper);
+        List<FcUnit> fcUnits;
+        QueryWrapper<FcUnit> queryWrapper;
+        if(buildingCode.equals("")){
+            queryWrapper = new QueryWrapper<>();
+            queryWrapper.select("*");
+            fcUnits = fcUnitMapper.selectList(queryWrapper);
+        }
+        else {
+            queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("building_code", buildingCode);
+            fcUnits = fcUnitMapper.selectList(queryWrapper);
+        }
         return fcUnits;
     }
 
     @Override
     public List<FcCell> selectCell(String unitCode) {
-        QueryWrapper<FcCell> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("unit_code",unitCode);
-        List<FcCell> fcCells = fcCellMapper.selectList(queryWrapper);
+        QueryWrapper<FcCell> queryWrapper;
+        List<FcCell> fcCells;
+        if (unitCode.equals("")){
+            queryWrapper = new QueryWrapper<>();
+            queryWrapper.select("*");
+            fcCells = fcCellMapper.selectList(queryWrapper);
+        }
+        else {
+            queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("unit_code", unitCode);
+            fcCells = fcCellMapper.selectList(queryWrapper);
+        }
         return fcCells;
     }
 
@@ -153,5 +170,40 @@ public class EstateServiceImpl implements EstateService {
         queryWrapper.eq("company",company);
         List<FcEstate> estates = fcEstateMapper.selectList(queryWrapper);
         return estates;
+    }
+
+    @Override
+    public List<FcEstate> selectAllEstate() {
+        List<FcEstate> fcEstates = fcEstateMapper.selectAllEstate();
+        return fcEstates;
+    }
+
+    @Override
+    public List<FcBuilding> selectBuildingByEstateCode(String estateCode) {
+        /*
+        * 思路：当前端发送请求携带参数时，作条件查询，如果不携带参数则进行全量查询
+        * */
+        List<FcBuilding> fcBuildings;
+        QueryWrapper<FcBuilding> queryWrapper;
+        if (estateCode.equals("")){
+            queryWrapper = new QueryWrapper<>();
+            queryWrapper.select("*");
+            fcBuildings = fcBuildingMapper.selectList(queryWrapper);
+        }
+        else {
+            queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("estate_code", estateCode);
+            fcBuildings = fcBuildingMapper.selectList(queryWrapper);
+        }
+        return fcBuildings;
+    }
+
+    @Override
+    public FcBuilding selectBuildingByEstateCodeAndBuildingCode(String buildingCode, String estateCode) {
+        QueryWrapper<FcBuilding> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("estate_code",estateCode);
+        queryWrapper.eq("building_code",buildingCode);
+        FcBuilding fcBuilding = fcBuildingMapper.selectOne(queryWrapper);
+        return fcBuilding;
     }
 }
