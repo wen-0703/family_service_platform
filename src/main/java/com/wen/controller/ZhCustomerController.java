@@ -46,10 +46,14 @@ public class ZhCustomerController {
     @RequestMapping("/selectCustomer")
     public R selectCustomer(@RequestBody Map<String,Object> params){
         System.out.println("selectCustomer");
+        String customerType = null;
         String column = params.get("column").toString();
         String value = params.get("value").toString();
+        if(params.get("customerType")!=null) {
+            customerType = params.get("customerType").toString();
+        }
         System.out.println(column + ":" + value);
-        List<ZhCustomer> zhCustomers = zhCustomerService.selectCustomer(column,value);
+        List<ZhCustomer> zhCustomers = zhCustomerService.selectCustomer(column,value,customerType);
         return new R(zhCustomers);
     }
 }

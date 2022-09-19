@@ -25,5 +25,5 @@ public interface ZhCustomerService extends IService<ZhCustomer> {
      * 查询全部业主信息
      * @return 查询返回全部的业主信息
      */
-    List<ZhCustomer> selectCustomer(String column,String value);
+    List<ZhCustomer> selectCustomer(String column,String value,String customerType);
 }

@@ -36,16 +36,28 @@ public class ZhCustomerServiceImpl extends ServiceImpl<ZhCustomerMapper, ZhCusto
     }
 
     @Override
-    public List<ZhCustomer> selectCustomer(String column,String value) {
-        List<ZhCustomer> zhCustomers;
-        QueryWrapper<ZhCustomer> queryWrapper = new QueryWrapper<>();
-        if ("".equals(column)){
-            zhCustomers = zhCustomerMapper.selectAll();
+    public List<ZhCustomer> selectCustomer(String column,String value,String customerType) {
+        ZhCustomer temp = new ZhCustomer();
+
+        if("customer_code".equals(column)){
+            temp.setCustomerCode(value);
         }
-        else {
-            queryWrapper.eq(column,value);
-            zhCustomers = zhCustomerMapper.selectList(queryWrapper);
+        else if ("customer_name".equals(column)){
+            temp.setCustomerName(value);
         }
+        else if("certificate_number".equals(column)){
+            temp.setCertificateNumber(value);
+        }
+        else if("phone_number".equals(column)){
+            temp.setPhoneNumber(value);
+        }
+        else if("正式业主".equals(customerType)){
+            temp.setCustomerType(customerType);
+        }
+        else if("临时业主".equals(customerType)){
+            temp.setCustomerType(customerType);
+        }
+        List<ZhCustomer> zhCustomers = zhCustomerMapper.selectAll(temp);
         return zhCustomers;
     }
 }

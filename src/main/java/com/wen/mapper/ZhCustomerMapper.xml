@@ -49,6 +49,22 @@
         FROM zh_customer a
         LEFT JOIN tbl_company b
         on a.company = b.id
+        where 1=1
+        <if test="customerCode != null">
+            and customer_code =#{customerCode}
+        </if>
+        <if test="customerName != null">
+            and customer_name =#{customerName}
+        </if>
+        <if test="certificateNumber != null">
+            and certificate_number =#{certificateNumber}
+        </if>
+        <if test="phoneNumber != null">
+            and phone_number =#{phoneNumber}
+        </if>
+        <if test="customerType != null">
+            and customer_type =#{customerType}
+        </if>
     </select>
 
     <resultMap id="selectAllMap" type="com.wen.bean.ZhCustomer">

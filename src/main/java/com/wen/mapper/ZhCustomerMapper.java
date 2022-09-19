@@ -19,6 +19,6 @@ public interface ZhCustomerMapper extends BaseMapper<ZhCustomer> {
      * 当有参数时，根据条件查询业主信息
      * @return 查询的一条或多条业主信息
      */
-    List<ZhCustomer> selectAll();
+    List<ZhCustomer> selectAll(ZhCustomer temp);
 
 }
